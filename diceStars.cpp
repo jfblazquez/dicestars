@@ -7,10 +7,6 @@
 #include "Game.h"
 #include "diceStars.h"
 
-std::random_device rd;
-std::mt19937 mt(rd());
-std::uniform_int_distribution<int> dist(1, 6);
-
 //2 black
 // 3 purple
 // 4 blue
@@ -19,7 +15,7 @@ std::uniform_int_distribution<int> dist(1, 6);
 * 2: 4+4 +2
 * 3: 4+3+3
 * 4: 4+2+4
-* 5:4+1+5
+// * 5:4+1+5
 * 6:4+0+6
 */
 

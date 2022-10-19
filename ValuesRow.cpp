@@ -39,3 +39,10 @@ bool ValuesRow::CanAdd(std::vector<Die>& dice) {
     ret = ret && dice.size() > 0;
     return ret;
 }
+
+int ValuesRow::Sum()
+{
+    int n = 0;
+    std::for_each(values.begin(), values.end(), [&n](auto& it) {if (it > 0) { n+= it; }});
+    return n;
+}

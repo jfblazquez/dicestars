@@ -8,9 +8,12 @@
 struct PlayerSheet {
     //black/purple/blue/orange
     std::array<std::array<int, 8>, 5> arr;
-    std::array<int, 5> missingStars{ 2,3,4,5,6 };
+    const std::array<int, 5> initialMissingStars{ 2,3,4,5,6 };
+    std::array<int, 5> missingStars{ initialMissingStars };
     std::array<int, 5> maxElements{ 8,7,6,5,4 };
     const int maxInColour = 5;
+    const int minDie = 2;
+    const int maxDie = 6;
 
     PlayerSheet();
 
@@ -24,4 +27,12 @@ struct PlayerSheet {
     ValuesRow GetColourRow(Colours colour);
 
     ValuesRow GetDieRow(int n);
+
+    int GetPoints();
+
+    bool AnyStarFill(int die);
+
+    bool AllStarCompleted(int die);
+
+    int StarMultiplier(int die);
 };

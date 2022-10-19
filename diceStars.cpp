@@ -27,7 +27,7 @@ int main()
     Game g;
     g.Init(2);
     //TODO: Change shift
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < 4; ++i) {
         if (g.TakeFromBag(g.bag.MaxToTake())) {
             g.PrintReserve();
         }

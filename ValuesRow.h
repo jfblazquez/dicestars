@@ -2,6 +2,7 @@
 #include <vector>
 #include <functional>
 #include <algorithm>
+#include <numeric>
 #include "Die.h"
 
 struct ValuesRow {
@@ -16,4 +17,6 @@ struct ValuesRow {
     bool Add(std::vector<Die>& dice);
 
     bool CanAdd(std::vector<Die>& dice);
+
+    int Sum();
 };

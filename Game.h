@@ -5,10 +5,12 @@
 #include "Actions.h"
 #include "Action.h"
 #include "PlayerSheet.h"
+#include "Discard.h"
 
 struct Game {
     Bag bag;
     Reserve reserve;
+    Discard discard;
     std::vector<PlayerSheet> players;
     int playerShift{};
 
@@ -22,12 +24,19 @@ struct Game {
 
     bool PlayStars(int n, bool restToBag);
 
+    void PrintBag();
+
     void PrintReserve();
+
+    void PrintDiscard();
 
     int nextPlayer();
 
     PlayerSheet& currentPlayer();
 
-    Actions ActionsForCurrentPlayer();;
+    Actions ActionsForCurrentPlayer();
+
+    bool DoAction(Action& action);
+
 
 };

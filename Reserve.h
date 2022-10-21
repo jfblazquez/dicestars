@@ -6,6 +6,6 @@
 
 struct Reserve {
     std::vector<Die> dice;
-    Actions GetActions();;
+    Actions GetActions();
     bool TakeFromReserve(std::vector<Die>& toRemove);
 };

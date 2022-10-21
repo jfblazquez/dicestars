@@ -12,6 +12,7 @@ struct Action {
     Colours paramColour{ Colours::NONE };
     int paramNumber{ 0 };
     int paramStars{ 0 }; //TODO: Decide how to star haha
+    bool onEndReserveToBag{};
     std::vector<Die> dice;
     void Print() const;
 };

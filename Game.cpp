@@ -45,9 +45,25 @@ bool Game::PlayStars(int n, bool restToBag) {
     return false;
 }
 
+void Game::PrintBag() {
+    std::cout << "Bag: ";
+    for (const auto& it : bag.dice) {
+        std::cout << it.Text();
+    }
+    std::cout << '\n';
+}
+
 void Game::PrintReserve() {
     std::cout << "Reserve: ";
     for (const auto& it : reserve.dice) {
+        std::cout << it.Text();
+    }
+    std::cout << '\n';
+}
+
+void Game::PrintDiscard() {
+    std::cout << "Discard: ";
+    for (const auto& it : discard.dice) {
         std::cout << it.Text();
     }
     std::cout << '\n';
@@ -68,6 +84,22 @@ Actions Game::ActionsForCurrentPlayer() {
     for (auto& action : actionsFromReserve.actions) {
         if (currentPlayer().CanDoAction(action)) {
             ret.actions.push_back(action);
+        }
+    }
+    return ret;
+}
+
+bool Game::DoAction(Action& action)
+{
+    bool ret = currentPlayer().DoAction(action);
+    reserve.TakeFromReserve(action.dice);
+    discard.Add(action.dice);
+    if (bag.dice.empty() || action.actionType == ActionType::STARS) {
+        bag.AddToBag(discard.dice);
+        discard.dice.clear();
+        if (action.onEndReserveToBag) {
+            bag.AddToBag(reserve.dice);
+            reserve.dice.clear();
         }
     }
     return ret;

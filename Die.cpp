@@ -27,5 +27,8 @@ std::string Die::Text() const {
     else if (IsNumber()) {
         ret += std::to_string(number) + "]";
     }
+    else {
+        ret += "]";
+    }
     return ret;
 }

@@ -27,27 +27,32 @@ int main()
     Game g;
     g.Init(2);
     //TODO: Change shift
-    for (int i = 0; i < 4; ++i) {
+    /*for (int i = 0; i < 4; ++i) {
         if (g.TakeFromBag(g.bag.MaxToTake())) {
             g.PrintReserve();
         }
         else {
             std::cout << "Cant take that much from bag. Max " << g.bag.MaxToTake() << "\n";
         }
-    }
+    }*/
     g.currentPlayer().Print();
-    for (int i = 0; i < 100; i++) {
+    for (int i = 1; i <= 10; i++) {
+        std::cout << "Turn " << i << "\n";
+        std::cout << "Take from bag max\n";
+        g.TakeFromBag(g.bag.MaxToTake());
+        g.PrintReserve();
         auto actions = g.ActionsForCurrentPlayer();
         actions.Print();
         if (actions.actions.empty()) return 0;
         Action& actionToDo = actions.actions.front();
         std::cout << "Doing action ";
         actionToDo.Print();
-        bool ret = g.currentPlayer().DoAction(actionToDo);
-        g.reserve.TakeFromReserve(actionToDo.dice);
-        g.bag.AddToBag(actionToDo.dice);
+        bool ret = g.DoAction(actionToDo);
+        std::cout << "After action:\n";
         g.currentPlayer().Print();
+        g.PrintBag();
         g.PrintReserve();
+        g.PrintDiscard();        
     }
 
 }

@@ -145,6 +145,7 @@
     <ClCompile Include="Colours.cpp" />
     <ClCompile Include="diceStars.cpp" />
     <ClCompile Include="Die.cpp" />
+    <ClCompile Include="Discard.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="PlayerSheet.cpp" />
     <ClCompile Include="RandomEngine.cpp" />
@@ -158,11 +159,15 @@
     <ClInclude Include="Colours.h" />
     <ClInclude Include="diceStars.h" />
     <ClInclude Include="Die.h" />
+    <ClInclude Include="Discard.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="PlayerSheet.h" />
     <ClInclude Include="RandomEngine.h" />
     <ClInclude Include="Reserve.h" />
     <ClInclude Include="ValuesRow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

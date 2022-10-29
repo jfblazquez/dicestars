@@ -52,7 +52,8 @@ int main()
         g.currentPlayer().Print();
         g.PrintBag();
         g.PrintReserve();
-        g.PrintDiscard();        
+        g.PrintDiscard();    
+        //__lsan_do_recoverable_leak_check();
     }
 
 }

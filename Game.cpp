@@ -2,22 +2,9 @@
 
 void Game::Init(int nplayers) {
     players = std::vector<PlayerSheet>(nplayers, PlayerSheet());
-    Die black{ Colours::BLACK,0 };
-    Die purple{ Colours::PURPLE,0 };
-    Die blue{ Colours::BLUE,0 };
-    Die orange{ Colours::ORANGE,0 };
-    for (int i = 0; i < 2; ++i) {
-        bag.dice.push_back(black);
-    }
-    for (int i = 0; i < 3; ++i) {
-        bag.dice.push_back(purple);
-    }
-    for (int i = 0; i < 4; ++i) {
-        bag.dice.push_back(blue);
-    }
-    for (int i = 0; i < 4; ++i) {
-        bag.dice.push_back(orange);
-    }
+    dice.Init();
+    vectorDie vDice = dice.GetDice();
+    bag.AddToBag(vDice);
     reserve.dice.clear();
     playerShift = 0;
     PlayerSheet& currentPlayer2 = players[playerShift];
@@ -25,7 +12,7 @@ void Game::Init(int nplayers) {
 }
 
 bool Game::TakeFromBag(int n) {
-    std::vector<Die> newDice;
+    vectorDie newDice;
     bool ret = bag.TakeFromBag(n, newDice);
     if (ret) {
         reserve.dice.insert(reserve.dice.end(), newDice.begin(), newDice.end());
@@ -47,7 +34,7 @@ bool Game::PlayStars(int n, bool restToBag) {
 
 void Game::PrintBag() {
     std::cout << "Bag: ";
-    for (const auto& it : bag.dice) {
+    for (const Die& it : bag.dice) {
         std::cout << it.Text();
     }
     std::cout << '\n';
@@ -55,7 +42,7 @@ void Game::PrintBag() {
 
 void Game::PrintReserve() {
     std::cout << "Reserve: ";
-    for (const auto& it : reserve.dice) {
+    for (const Die& it : reserve.dice) {
         std::cout << it.Text();
     }
     std::cout << '\n';
@@ -63,7 +50,7 @@ void Game::PrintReserve() {
 
 void Game::PrintDiscard() {
     std::cout << "Discard: ";
-    for (const auto& it : discard.dice) {
+    for (const Die& it : discard.dice) {
         std::cout << it.Text();
     }
     std::cout << '\n';

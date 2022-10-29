@@ -143,6 +143,7 @@
     <ClCompile Include="Actions.cpp" />
     <ClCompile Include="Bag.cpp" />
     <ClCompile Include="Colours.cpp" />
+    <ClCompile Include="Dice.cpp" />
     <ClCompile Include="diceStars.cpp" />
     <ClCompile Include="Die.cpp" />
     <ClCompile Include="Discard.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Actions.h" />
     <ClInclude Include="Bag.h" />
     <ClInclude Include="Colours.h" />
+    <ClInclude Include="Dice.h" />
     <ClInclude Include="diceStars.h" />
     <ClInclude Include="Die.h" />
     <ClInclude Include="Discard.h" />

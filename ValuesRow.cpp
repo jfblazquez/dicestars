@@ -18,11 +18,11 @@ int ValuesRow::emptyValues() {
     return n;
 }
 
-bool ValuesRow::Add(std::vector<Die>& dice) {
+bool ValuesRow::Add(vectorDie& dice) {
     bool ret = CanAdd(dice);
     if (!ret) { return false; }
     int diceSum = 0;
-    std::for_each(dice.begin(), dice.end(), [&diceSum](auto& it) {
+    std::for_each(dice.begin(), dice.end(), [&diceSum](Die& it) {
         if (it.IsNumber()) {
             diceSum += it.number;
         }
@@ -34,7 +34,7 @@ bool ValuesRow::Add(std::vector<Die>& dice) {
     return true;
 }
 
-bool ValuesRow::CanAdd(std::vector<Die>& dice) {
+bool ValuesRow::CanAdd(vectorDie& dice) {
     bool ret = emptyValues() >= (int)dice.size();
     ret = ret && dice.size() > 0;
     return ret;

@@ -5,7 +5,7 @@ void Action::Print() const {
     if (actionType == ActionType::COLOUR) {
         ss << "Action type colour. " << GetColour(paramColour) << "\n";
         ss << "Dice: ";
-        for (const auto& die : dice) {
+        for (const Die& die : dice) {
             ss << die.Text();
         }
         ss << '\n';
@@ -14,7 +14,7 @@ void Action::Print() const {
     else if (actionType == ActionType::NUMBER) {
         ss << "Action type number. " << paramNumber << "\n";
         ss << "Dice: ";
-        for (const auto& die : dice) {
+        for (const Die& die : dice) {            
             ss << die.Text();
         }
         ss << '\n';
@@ -23,7 +23,7 @@ void Action::Print() const {
     else if (actionType == ActionType::STARS) {
         ss << "Action type stars. \n";
         ss << "Dice: ";
-        for (const auto& die : dice) {
+        for (const Die& die : dice) {
             ss << die.Text();
         }
         ss << '\n';

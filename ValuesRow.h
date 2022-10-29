@@ -14,9 +14,9 @@ struct ValuesRow {
 
     int emptyValues();
 
-    bool Add(std::vector<Die>& dice);
+    bool Add(vectorDie& dice);
 
-    bool CanAdd(std::vector<Die>& dice);
+    bool CanAdd(vectorDie& dice);
 
     int Sum();
 };

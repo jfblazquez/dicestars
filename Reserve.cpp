@@ -8,10 +8,10 @@ Actions Reserve::GetActions() {
     return actions;
 }
 
-bool Reserve::TakeFromReserve(std::vector<Die>& toRemove) {
+bool Reserve::TakeFromReserve(vectorDie& toRemove) {
     auto new_end = std::remove_if(dice.begin(), dice.end(),
-        [&toRemove](const auto& it)
-        { return std::any_of(toRemove.begin(), toRemove.end(), [&it](auto& r) {return r.id == it.id;});});
+        [&toRemove](const Die& it)
+        { return std::any_of(toRemove.begin(), toRemove.end(), [&it](Die& r) {return r.id == it.id;});});
 
     dice.erase(new_end, dice.end());
     return true;

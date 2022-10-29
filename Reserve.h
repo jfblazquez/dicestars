@@ -5,7 +5,7 @@
 #include "Actions.h"
 
 struct Reserve {
-    std::vector<Die> dice;
+    vectorDie dice;
     Actions GetActions();
-    bool TakeFromReserve(std::vector<Die>& toRemove);
+    bool TakeFromReserve(vectorDie& toRemove);
 };

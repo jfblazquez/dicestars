@@ -40,8 +40,7 @@ bool ValuesRow::CanAdd(vectorDie& dice) {
     return ret;
 }
 
-int ValuesRow::Sum()
-{
+int ValuesRow::Sum() {
     int n = 0;
     std::for_each(values.begin(), values.end(), [&n](auto& it) {if (it > 0) { n+= it; }});
     return n;

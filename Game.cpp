@@ -1,14 +1,14 @@
 #include "Game.h"
 
 void Game::Init(int nplayers) {
-    players = std::vector<PlayerSheet>(nplayers, PlayerSheet());
+    for (int i = 0; i < nplayers; i++) {
+        players.push_back(std::make_shared<PlayerSheet>());
+    }
     dice.Init();
     vectorDie vDice = dice.GetDice();
     bag.AddToBag(vDice);
     reserve.dice.clear();
     playerShift = 0;
-    PlayerSheet& currentPlayer2 = players[playerShift];
-    //currentPlayer = 
 }
 
 bool Game::TakeFromBag(int n) {
@@ -62,7 +62,7 @@ int Game::nextPlayer() {
 }
 
 PlayerSheet& Game::currentPlayer() {
-    return players[playerShift];
+    return *players[playerShift].get();
 }
 
 Actions Game::ActionsForCurrentPlayer() {

@@ -13,7 +13,7 @@ struct Game {
     Bag bag;
     Reserve reserve;
     Discard discard;
-    std::vector<PlayerSheet> players;
+    vectorPPlayerSheet players;
     int playerShift{};
 
     void Init(int nplayers);

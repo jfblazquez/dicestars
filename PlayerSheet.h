@@ -5,7 +5,9 @@
 #include "Action.h"
 #include "ValuesRow.h"
 
-struct PlayerSheet {
+class PlayerSheet {
+public:
+
     //black/purple/blue/orange
     std::array<std::array<int, 8>, 5> arr;
     const std::array<int, 5> initialMissingStars{ 2,3,4,5,6 };
@@ -17,16 +19,17 @@ struct PlayerSheet {
 
     PlayerSheet();
 
+    ~PlayerSheet() = default;
+
     void Print();
 
     bool CanDoAction(Action& action);
 
     bool DoAction(Action& action);
 
-    //TODO: Cache colourRow and dieRow
-    ValuesRow GetColourRow(Colours colour);
+    ValuesRow& GetColourRow(Colours colour);
 
-    ValuesRow GetDieRow(int n);
+    ValuesRow& GetDieRow(int n);
 
     int GetPoints();
 
@@ -35,4 +38,24 @@ struct PlayerSheet {
     bool AllStarCompleted(int die);
 
     int StarMultiplier(int die);
+
+    void DebugAddress();
+
+    PlayerSheet(const PlayerSheet&) = delete;
+
+private:
+
+    void CreateValuesRow();
+
+    void CreateColourRows();
+
+    void CreateDieRows();
+
+    vectorPValuesRow colourRows;
+
+    vectorPValuesRow dieRows;
+
 };
+
+using ptrPlayerSheet = std::shared_ptr<PlayerSheet>;
+using vectorPPlayerSheet = std::vector<ptrPlayerSheet>;

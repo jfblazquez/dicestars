@@ -6,7 +6,7 @@ void Actions::Print() {
     }
 }
 
-Action& Actions::GetOrCreateColourAction(const Die& die) {
+Action& Actions::GetOrCreateColourAction(Die& die) {
     for (auto& action : actions) {
         if (action.actionType == ActionType::COLOUR &&
             action.paramColour == die.colour) {
@@ -23,7 +23,7 @@ Action& Actions::GetOrCreateColourAction(const Die& die) {
     return actions[actions.size() - 1];
 }
 
-Action& Actions::GetOrCreateNumberAction(const Die& die) {
+Action& Actions::GetOrCreateNumberAction(Die& die) {
     if (!die.IsNumber()) { throw std::invalid_argument("Die is not number"); }
     for (auto& action : actions) {
         if (action.actionType == ActionType::NUMBER &&
@@ -41,7 +41,7 @@ Action& Actions::GetOrCreateNumberAction(const Die& die) {
     return actions[actions.size() - 1];
 }
 
-Action& Actions::GetOrCreateStarAction(const Die& die) {
+Action& Actions::GetOrCreateStarAction(Die& die) {
     if (!die.IsStar()) { throw std::invalid_argument("Die is not star"); }
     for (auto& action : actions) {
         if (action.actionType == ActionType::STARS) {
@@ -57,7 +57,7 @@ Action& Actions::GetOrCreateStarAction(const Die& die) {
     return actions[actions.size() - 1];
 }
 
-void Actions::Add(const Die& die) {
+void Actions::Add(Die& die) {
     GetOrCreateColourAction(die);
     if (die.IsNumber()) {
         GetOrCreateNumberAction(die);

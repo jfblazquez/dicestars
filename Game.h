@@ -6,12 +6,14 @@
 #include "Action.h"
 #include "PlayerSheet.h"
 #include "Discard.h"
+#include "Dice.h"
 
 struct Game {
+    Dice dice;
     Bag bag;
     Reserve reserve;
     Discard discard;
-    std::vector<PlayerSheet> players;
+    vectorPPlayerSheet players;
     int playerShift{};
 
     void Init(int nplayers);

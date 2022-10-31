@@ -8,11 +8,11 @@ struct Actions {
     std::vector<Action> actions;
     void Print();
 
-    Action& GetOrCreateColourAction(const Die& die);
+    Action& GetOrCreateColourAction(Die& die);
 
-    Action& GetOrCreateNumberAction(const Die& die);
+    Action& GetOrCreateNumberAction(Die& die);
 
-    Action& GetOrCreateStarAction(const Die& die);
+    Action& GetOrCreateStarAction(Die& die);
 
-    void Add(const Die& die);
+    void Add(Die& die);
 };

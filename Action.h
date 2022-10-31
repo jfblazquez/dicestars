@@ -13,6 +13,6 @@ struct Action {
     int paramNumber{ 0 };
     int paramStars{ 0 }; //TODO: Decide how to star haha
     bool onEndReserveToBag{};
-    std::vector<Die> dice;
+    vectorDie dice;
     void Print() const;
 };

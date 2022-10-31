@@ -3,20 +3,30 @@
 #include <functional>
 #include <algorithm>
 #include <numeric>
+#include <memory>
+#include <iostream>
 #include "Die.h"
 
+using refInt = std::reference_wrapper<int>;
+using vectorRInt = std::vector<refInt>;
+
 struct ValuesRow {
-    std::vector<std::reference_wrapper<int>> values;
+    vectorRInt values;
     
-    ValuesRow(std::vector<std::reference_wrapper<int>> _values) : values(_values) {}
+    ValuesRow(vectorRInt _values) : values(_values) {}
     
     bool Add(int value);
 
     int emptyValues();
 
-    bool Add(std::vector<Die>& dice);
+    bool Add(vectorDie& dice);
 
-    bool CanAdd(std::vector<Die>& dice);
+    bool CanAdd(vectorDie& dice);
 
     int Sum();
+
+    ValuesRow(const ValuesRow&) = delete;
 };
+
+using ptrValuesRow = std::shared_ptr<ValuesRow>;
+using vectorPValuesRow = std::vector<ptrValuesRow>;

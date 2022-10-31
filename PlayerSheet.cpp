@@ -1,7 +1,17 @@
 #include "PlayerSheet.h"
 
 PlayerSheet::PlayerSheet() {
+    std::cout << "START PlayerSheet\n" << std::endl;
     arr.fill({ { -1,-1,-1,-1,-1,-1,-1,-1 } });
+    CreateValuesRow();
+}
+
+void PlayerSheet::DebugAddress()
+{
+    auto origin = &arr[0][0];
+    auto ref = &(dieRows[0].get()->values[0].get());
+    bool ok = origin == ref;
+    std::cerr << "DebugAddress ok?: " << std::boolalpha << ok << "\n";
 }
 
 void PlayerSheet::Print() {
@@ -31,11 +41,11 @@ void PlayerSheet::Print() {
 bool PlayerSheet::CanDoAction(Action& action) {
     bool ret = false;
     if (action.actionType == ActionType::COLOUR) {
-        ValuesRow row = GetColourRow(action.paramColour);
+        ValuesRow& row = GetColourRow(action.paramColour);
         ret = row.CanAdd(action.dice);
     }
     else if (action.actionType == ActionType::NUMBER) {
-        ValuesRow row = GetDieRow(action.paramNumber);
+        ValuesRow& row = GetDieRow(action.paramNumber);
         ret = row.CanAdd(action.dice);
     }
     else if (action.actionType == ActionType::STARS) {
@@ -48,11 +58,11 @@ bool PlayerSheet::CanDoAction(Action& action) {
 bool PlayerSheet::DoAction(Action& action) {
     bool ret = false;
     if (action.actionType == ActionType::COLOUR) {
-        ValuesRow row = GetColourRow(action.paramColour);
+        ValuesRow& row = GetColourRow(action.paramColour);
         ret = row.Add(action.dice);
     }
     else if (action.actionType == ActionType::NUMBER) {
-        ValuesRow row = GetDieRow(action.paramNumber);
+        ValuesRow& row = GetDieRow(action.paramNumber);
         ret = row.Add(action.dice);
     }
     else if (action.actionType == ActionType::STARS) {
@@ -62,56 +72,43 @@ bool PlayerSheet::DoAction(Action& action) {
     return ret;
 }
 
-//TODO: Cache colourRow and dieRow
 
-ValuesRow PlayerSheet::GetColourRow(Colours colour) {
-    std::vector<std::reference_wrapper<int>> ret;
+
+ValuesRow& PlayerSheet::GetColourRow(Colours colour) {
     int pos = GetColourIndex(colour);
-    for (int i = 0; i < maxInColour; i++) {
-        ret.push_back(arr[i][pos]);
-    }
-    return ValuesRow(ret);
+    return *colourRows[pos];
 }
 
-ValuesRow PlayerSheet::GetDieRow(int die) {
+ValuesRow& PlayerSheet::GetDieRow(int die) {
     size_t idx = die - minDie;
     if (idx >= maxElements.size() ) { throw std::invalid_argument("Not a valid die number"); }
-    std::vector<std::reference_wrapper<int>> ret;
-    for (int i = 0; i < maxElements[idx]; i++) {
-        ret.push_back(arr[idx][i]);
-    }
-    return ValuesRow(ret);
+    return *dieRows[idx];
 }
 
 
-int PlayerSheet::GetPoints()
-{
+int PlayerSheet::GetPoints() {
     //TODO ValuesRow with ValuesWithStarsRows
     int points = 0;
-    for (auto die = minDie; die < maxDie; die++) {
-        ValuesRow row = GetDieRow(die);
+    for (auto die = minDie; die <= maxDie; die++) {
+        ValuesRow& row = GetDieRow(die);
         points += row.Sum() * StarMultiplier(die);
     }
     return points;
 }
 
-
-bool PlayerSheet::AnyStarFill(int die)
-{
+bool PlayerSheet::AnyStarFill(int die) {
     size_t idx = die - minDie;
     if (idx >= maxElements.size()) { throw std::invalid_argument("Not a valid die number"); }
     return missingStars[idx] != initialMissingStars[idx];
 }
 
-bool PlayerSheet::AllStarCompleted(int die)
-{
+bool PlayerSheet::AllStarCompleted(int die) {
     size_t idx = die - minDie;
     if (idx >= maxElements.size()) { throw std::invalid_argument("Not a valid die number"); }
     return missingStars[idx] == 0;
 }
 
-int PlayerSheet::StarMultiplier(int die)
-{
+int PlayerSheet::StarMultiplier(int die) {
     if (AllStarCompleted(die)) {
         return 2;
     }
@@ -120,4 +117,31 @@ int PlayerSheet::StarMultiplier(int die)
     }
     return 1;
 
+}
+
+void PlayerSheet::CreateValuesRow() {
+    CreateColourRows();
+    CreateDieRows();
+}
+
+void PlayerSheet::CreateColourRows() {
+    for (int pos = 0; pos < colourNum; pos++) {
+        vectorRInt ret;
+        for (int i = 0; i < maxInColour; i++) {
+            ret.push_back(arr[i][pos]);
+        }
+        colourRows.push_back(std::make_shared<ValuesRow>(ret));
+    }
+}
+
+void PlayerSheet::CreateDieRows() {
+    for (int die = minDie; die <= maxDie; die++) {
+        size_t idx = die - minDie;
+        if (idx >= maxElements.size()) { throw std::invalid_argument("Not a valid die number"); }
+        vectorRInt ret;
+        for (int i = 0; i < maxElements[idx]; i++) {
+            ret.push_back(arr[idx][i]);
+        }
+        dieRows.push_back(std::make_shared<ValuesRow>(ret));
+    }
 }

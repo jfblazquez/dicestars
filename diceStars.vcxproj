@@ -31,6 +31,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -84,7 +85,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -143,6 +144,7 @@
     <ClCompile Include="Actions.cpp" />
     <ClCompile Include="Bag.cpp" />
     <ClCompile Include="Colours.cpp" />
+    <ClCompile Include="Dice.cpp" />
     <ClCompile Include="diceStars.cpp" />
     <ClCompile Include="Die.cpp" />
     <ClCompile Include="Discard.cpp" />
@@ -157,6 +159,7 @@
     <ClInclude Include="Actions.h" />
     <ClInclude Include="Bag.h" />
     <ClInclude Include="Colours.h" />
+    <ClInclude Include="Dice.h" />
     <ClInclude Include="diceStars.h" />
     <ClInclude Include="Die.h" />
     <ClInclude Include="Discard.h" />

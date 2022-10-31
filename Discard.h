@@ -6,10 +6,10 @@
 
 struct Discard
 {
-    std::vector<Die> dice;    
+    vectorDie dice;    
     
-    bool TakeFromDiscard(std::vector<Die>& toRemove);
+    bool TakeFromDiscard(vectorDie& toRemove);
 
-    bool Add(std::vector<Die>& newDice);
+    bool Add(vectorDie& newDice);
 };
 

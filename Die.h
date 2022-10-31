@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <functional>
 #include "Colours.h"
 #include "RandomEngine.h"
 
